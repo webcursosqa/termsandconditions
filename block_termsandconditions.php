@@ -85,15 +85,19 @@ class block_termsandconditions extends block_base {
                                         "text += ".'"'."</ol>".'";'.
                                         "text += ".'"'."<h5> <b><input type='checkbox' name='checkacept' id='checkacept' > Acepto los términos anteriormente expuestos <b></h5>".'";'.
                                         "text += ".'"'."<input type='submit' name='submitbutton' value ='Acepto' id='submitbutton' class='btn btn-primary'>".'";'."
-                                        $('.page').html(text);
-    	                                $('.page').attr('style','padding-left: 20px; padding-right: 20px; margin-left: 0px; margin-top: -22px;');
-    	                                $('.site-footer').attr('style','margin-left: 0px; margin-right: 0px!important;');
-    	                                $('.site-menubar').hide();
-    	                                $('#toggleMenubar').hide();
-    	                                $('#page-course-view-topics').attr('style','background: #f1f4f5');
-                                        $('#submitbutton').attr('style','margin-bottom: 5px;');
-    	                                
-                                        $('#nav-drawer').html('<div></div>');
+                                        
+                                        var container =  $('<div></div>').attr('id', 'container-terms');
+                                        container.append(text)
+                                        container.css('padding', '20px');
+                                        $('#page').html(container);
+                                        
+                                        $('body').css('transition', 'unset');
+                                        $('body.sidebar-pinned').css('margin-right', '0px');
+                                        $('#nav-drawer').remove();
+                                        $('body#page-course-view-topics').css('margin-left', '0px');
+                                        $('#focusmodebutton').remove();
+                                        $('div[data-region=drawer-toggle]').remove();
+                                        
         	                            $('#submitbutton').click(function() {
                                             if($('#checkacept').prop('checked')){
                                                 $.ajax({
